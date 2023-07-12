@@ -1,6 +1,18 @@
 ---
 - hosts: all
   gather_facts: no
-  roles:
-    - catalyst
+  become: true
+
+  tasks:
+    - name: filtrar fail
+      lineinfile:
+        path: log.txt
+        regexp: "FAILED!"
+        state: absent
+      register: resultado_filtrado
+
+    - name: ver resultado
+      debug:
+        var: resultado_filtrado
+
 ...
