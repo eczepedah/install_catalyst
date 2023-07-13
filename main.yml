@@ -5,7 +5,7 @@
 
   tasks:
     - name: leer log
-      command: /home/eczepedah/log.txt
+      command: cat /home/eczepedah/log.txt
       register: contenido_log
        
     - name: lineas de interes
