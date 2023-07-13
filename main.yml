@@ -8,7 +8,6 @@
       lineinfile:
         path: /home/eczepedah/log.txt
         regexp: "FAILED!"
-        state: absent
       register: resultado_filtrado
 
     - name: ver resultado
