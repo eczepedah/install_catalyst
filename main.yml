@@ -4,15 +4,16 @@
   become: true
 
   tasks:
-    - name: filtrar fail
-      lineinfile:
-        path: /home/eczepedah/log.txt
-        regexp: "FAILED!"
-        state: present
-      register: resultado_filtrado
+    - name: leer log
+      command: /home/eczepedah/log.txt
+      register: contenido_log
+       
+    - name: lineas de interes
+      set_fact:
+        lineas_interes: "{{ contenido_log.stdout_lines | select('regex_search', 'FAILED!' | list) }}"    
       
     - name: ver resultado
       debug:
-        var: resultado_filtrado
+        msg: "{{ lineas_interes }}"
 
 ...
