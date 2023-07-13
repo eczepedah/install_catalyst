@@ -6,7 +6,7 @@
   tasks:
     - name: filtrar fail
       lineinfile:
-        path: log.txt
+        path: /home/eczepedah/log.txt
         regexp: "FAILED!"
         state: absent
       register: resultado_filtrado
