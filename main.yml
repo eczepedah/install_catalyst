@@ -1,19 +1,26 @@
 ---
-- hosts: all
-  gather_facts: no
-  become: true
-
+- name: crear usuario
+  host: all
+  become: yes
+  vars: 
+    usurio: eve
+	  pass: 1234566
+	
   tasks:
-    - name: leer log
-      command: cat /home/eczepedah/log.txt
-      register: contenido_log
-       
-    - name: lineas de interes
-      set_fact:
-        lineas_interes: "{{ contenido_log.stdout_lines | select('regex_search', 'FAILED!' | list) }}"    
-      
-    - name: ver resultado
-      debug:
-        msg: "{{ lineas_interes }}"
-
+    - name: Crar directorio home
+      file: 
+        path: "/home/eve"
+        state: directory
+        owner: "{{ usuario }}"		 
+	      group: "{{ usuario }}"
+		    mode: '755'
+  
+    - name: Crar usuario
+      user:
+	      name: "{{ usuario }}"
+		    password: "{{ pass }}"
+		    createhome: yes
+		    home: "/home/{{ usuario }}"
+		    shell: /bin/bash
+		    state: present
 ...
