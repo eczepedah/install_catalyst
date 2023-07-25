@@ -5,22 +5,21 @@
   vars: 
     usurio: eve
     pass: 1234566
-	
-  tasks:
+	tasks:
     - name: Crar directorio home
       file: 
         path: "/home/eve"
         state: directory
         owner: "{{ usuario }}"		 
-	group: "{{ usuario }}"
-	mode: '755'
+	      group: "{{ usuario }}"
+	      mode: '755'
   
     - name: Crar usuario
       user:
         name: "{{ usuario }}"
-	password: "{{ pass }}"
-	createhome: yes
-	home: "/home/{{ usuario }}"
-	shell: /bin/bash
-	state: present
+	      password: "{{ pass }}"
+	      createhome: yes
+	      home: "/home/{{ usuario }}"
+	      shell: /bin/bash
+	      state: present
 ...
